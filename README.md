@@ -29,7 +29,7 @@ I have found that the present settings may cause occasional system instability. 
 
 # How it works:
 1. Checks whether your CPU has HWP support
-2. Enables HWP to allow performance profile tweaking by writing 0x1 to MSR register **IA32_HWP_ENABLE**
+2. Enables HWP to allow performance profile tweaking by writing 0x1 to MSR register **IA32_HWP_ENABLE (MSR 0x770)**
 3. Queries **IA32_HWP_CAPABILITIES (MSR 0x771)** to get the Maximum_Performance and Guaranteed_Performance values
 4. Sets the minimum performance to Guaranteed_Performance and the maximum performance to Maximum_Performance by writing to **IA32_HWP_REQUEST (MSR 0x774)**
 
