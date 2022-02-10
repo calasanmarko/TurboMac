@@ -7,8 +7,8 @@
 
 #include "CPUID.h"
 
-kern_return_t TurboMac2_start(kmod_info_t * ki, void *d);
-kern_return_t TurboMac2_stop(kmod_info_t *ki, void *d);
+kern_return_t TurboMac_start(kmod_info_t * ki, void *d);
+kern_return_t TurboMac_stop(kmod_info_t *ki, void *d);
 
 const uint32_t IA32_ENABLE_MSR = 0x770;
 const uint32_t IA32_ENABLE_MSR_TRUE = 0x1;
@@ -19,7 +19,7 @@ const uint32_t BASE_HWP_VALUE = 0x80000000;
 const uint32_t FIRST_BYTE_MASK = (1 << 8) - 1;
 const uint32_t SECOND_BYTE_MASK = ((1 << 16) - 1) ^ FIRST_BYTE_MASK;
 
-kern_return_t TurboMac2_start(kmod_info_t * ki, void *d)
+kern_return_t TurboMac_start(kmod_info_t * ki, void *d)
 {
     CPUID hwpID(0x06);
     
@@ -43,7 +43,7 @@ kern_return_t TurboMac2_start(kmod_info_t * ki, void *d)
     }
 }
 
-kern_return_t TurboMac2_stop(kmod_info_t *ki, void *d)
+kern_return_t TurboMac_stop(kmod_info_t *ki, void *d)
 {
     return KERN_SUCCESS;
 }
