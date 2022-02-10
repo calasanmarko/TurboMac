@@ -18,12 +18,14 @@
 	<string>KEXT</string>
 	<key>CFBundleShortVersionString</key>
 	<string>1.0</string>
+	<key>CFBundleSignature</key>
+	<string>????</string>
 	<key>CFBundleSupportedPlatforms</key>
 	<array>
 		<string>MacOSX</string>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>1.0.0d1</string>
+	<string>1</string>
 	<key>DTCompiler</key>
 	<string>com.apple.compilers.llvm.clang.1_0</string>
 	<key>DTPlatformBuild</key>
@@ -40,6 +42,15 @@
 	<string>1330</string>
 	<key>DTXcodeBuild</key>
 	<string>13E5086k</string>
+	<key>LSMinimumSystemVersion</key>
+	<string>10.9</string>
+	<key>NSHumanReadableCopyright</key>
+	<string></string>
+	<key>OSBundleLibraries</key>
+	<dict>
+		<key>com.apple.kpi.libkern</key>
+		<string>16.7</string>
+	</dict>
 	<key>IOKitPersonalities</key>
 	<dict>
 		<key>TurboMac</key>
@@ -53,15 +64,6 @@
 			<key>IOProviderClass</key>
 			<string>IOResources</string>
 		</dict>
-	</dict>
-	<key>LSMinimumSystemVersion</key>
-	<string>10.9</string>
-	<key>NSHumanReadableCopyright</key>
-	<string></string>
-	<key>OSBundleLibraries</key>
-	<dict>
-		<key>com.apple.kpi.libkern</key>
-		<string>16.7</string>
 	</dict>
 	<key>OSBundleRequired</key>
 	<string>Root</string>
