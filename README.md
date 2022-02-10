@@ -7,17 +7,27 @@ A malfunctioning or missing battery and an overzealous thermal controller can ca
 # Disclaimer
 **NO WARRANTY! I AM NOT TO BE HELD LIABLE FOR ANY DAMAGES.**
 
-This product was designed around a personal need - getting rid of the unbearable CPU throttling after my girlfriend's laptop battery died. As such it has only been tested on one device - a Macbook Pro 2017 running Catalina.
+This product was designed around a personal need - getting rid of the unbearable CPU throttling after my girlfriend's laptop battery died. As such it has only been tested on one device - a Macbook Pro 2017 running Catalina. **It only works on Intel-based Macs.**
 
 We are messing with CPU registers dealing with thermals, so **appropriate care is recommended**. Something going *seriously* wrong is pretty unlikely by itself, but in combination with other factors (did you mess with your fan settings? BD_PROCHOT?), and Macs' overall sensitivity you could end up causing permanent damage to your CPU.
 
 I have found that the present settings may cause occasional system instability. I will work on fixing this when I am less busy. **Keep an eye on your thermals.**
 
 # Installation
-**DISCLAIMER: Disabling SIP brings your system to a more vulnerable state. It is recommended that after installation you re-enable SIP (without the kext restriction) by running `csrutil enable --without kext` from Recovery mode.**
+**DISCLAIMER: Disabling SIP brings your system to a more vulnerable state. It is recommended that after installation you re-enable SIP (without the kext restriction) by running `csrutil enable --without kext` from Recovery mode. Even after you've done this, as long as the kext signing restriction remains disabled you should take special care when installing kexts.**
 
+## OS X 11.0 (Big Sur) and higher guide
+1. Go through steps 1-3 of the regular guide below
+2. Run `diskutil list` and note the identifier of your Mac partition
+3. Run `mkdir ~/nonroot`
+4. Run `sudo mount -o nobrowse -t apfs /dev/*IDENTIFIER* ~/nonroot` using the identifier from step 2
+5. Go through steps 5-9 of the regular guide below, replacing `/System/Library/Extensions` with `~/nonroot/System/Library/Extensions` wherever it comes up
+6. Run `sudo bless --folder ~/nonroot/System/Library/CoreServices --bootefi --create-snapshot`
+7. Restart your Mac
+
+## Regular guide
 1. Make a copy of `/System/Library/Extensions/IOPlatformPluginFamily.kext` in a safe location, in case anything goes wrong.
-2. Disable System Integrity Protection (SIP)
+2. *OS X 10.11 (El Capitan) and higher:* Disable System Integrity Protection (SIP)
 3. Open Terminal and `cd` to the Build folder
 4. Run `sudo mount -uw /`
 5. Run `sudo rm -rf /System/Library/Extensions/IOPlatformPluginFamily.kext`
