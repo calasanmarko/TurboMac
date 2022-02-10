@@ -21,7 +21,7 @@ I have found that the present settings may cause occasional system instability. 
 2. Run `diskutil list` and note the identifier of your Mac partition
 3. Run `mkdir ~/nonroot`
 4. Run `sudo mount -o nobrowse -t apfs /dev/*IDENTIFIER* ~/nonroot` using the identifier from step 2
-5. Go through steps 5-9 of the regular guide below, replacing `/System/Library/Extensions` with `~/nonroot/System/Library/Extensions` wherever it comes up
+5. Go through steps 5-7 of the regular guide below, replacing `/System/Library/Extensions` with `~/nonroot/System/Library/Extensions` wherever it comes up
 6. Run `sudo bless --folder ~/nonroot/System/Library/CoreServices --bootefi --create-snapshot`
 7. Restart your Mac
 
@@ -32,10 +32,10 @@ I have found that the present settings may cause occasional system instability. 
 4. Run `sudo mount -uw /`
 5. Run `sudo rm -rf /System/Library/Extensions/IOPlatformPluginFamily.kext`
 6. Run `sudo cp -rf TurboMac.kext /System/Library/Extensions/TurboMac.kext`
-7. Run `sudo chown -R root:wheel /System/Library/Extensions/TurboMac.kext`
-8. Run `sudo chmod -R 0644 /System/Library/Extensions/TurboMac.kext`
-9. Run `sudo kextcache -i /`
-10. Restart your Mac
+7. Run `sudo kextcache -i /`
+8. Restart your Mac
+
+You can verify that the extension has loaded correctly by seeing if it shows up when you type `kextstat | grep Turbo` in the Terminal.
 
 # How it works:
 1. Checks whether your CPU has HWP support
