@@ -11,7 +11,7 @@ This product was designed around a personal need - getting rid of the unbearable
 
 We are messing with CPU registers dealing with thermals, so **appropriate care is recommended**. Something going *seriously* wrong is pretty unlikely by itself, but in combination with other factors (did you mess with your fan settings? BD_PROCHOT?), and Macs' overall sensitivity you could end up causing permanent damage to your CPU.
 
-I have found that the present settings may cause occasional system instability. I will work on fixing this when I am less busy. **Keep an eye on your thermals.**
+**Keep an eye on your thermals.**
 
 # Installation
 **DISCLAIMER: Disabling SIP brings your system to a more vulnerable state. It is recommended that after installation you re-enable SIP (without the kext restriction) by running `csrutil enable --without kext` from Recovery mode. Even after you've done this, as long as the kext signing restriction remains disabled you should take special care when installing kexts.**
