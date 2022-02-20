@@ -7,13 +7,13 @@
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleExecutable</key>
-	<string>TurboMac</string>
+	<string>TurboMac2</string>
 	<key>CFBundleIdentifier</key>
-	<string>calasanmarko.TurboMac</string>
+	<string>calasanmarko.TurboMac2</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
-	<string>TurboMac</string>
+	<string>TurboMac2</string>
 	<key>CFBundlePackageType</key>
 	<string>KEXT</string>
 	<key>CFBundleShortVersionString</key>
@@ -53,14 +53,14 @@
 	</dict>
 	<key>IOKitPersonalities</key>
 	<dict>
-		<key>TurboMac</key>
+		<key>TurboMac2</key>
 		<dict>
 			<key>CFBundleIdentifier</key>
-			<string>calasanmarko.TurboMac</string>
+			<string>calasanmarko.TurboMac2</string>
 			<key>IOClass</key>
-			<string>TurboMac</string>
+			<string>TurboMac2</string>
 			<key>IOMatchCategory</key>
-			<string>TurboMac</string>
+			<string>TurboMac2</string>
 			<key>IOProviderClass</key>
 			<string>IOResources</string>
 		</dict>
