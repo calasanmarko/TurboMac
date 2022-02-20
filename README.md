@@ -31,7 +31,7 @@ We are messing with CPU registers dealing with thermals, so **appropriate care i
 3. Open Terminal and `cd` to the Build folder
 4. Run `sudo mount -uw /`
 5. Run `sudo rm -rf /System/Library/Extensions/IOPlatformPluginFamily.kext`
-6. Run `sudo cp -rf TurboMac.kext /System/Library/Extensions/TurboMac.kext`
+6. Run `sudo cp -rf TurboMac2.kext /System/Library/Extensions/TurboMac2.kext`
 7. Run `sudo kextcache -i /`
 8. Restart your Mac
 
