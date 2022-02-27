@@ -17,17 +17,19 @@ We are messing with CPU registers dealing with thermals, so **appropriate care i
 **DISCLAIMER: Disabling SIP brings your system to a more vulnerable state. It is recommended that after installation you re-enable SIP (without the kext restriction) by running `csrutil enable --without kext` from Recovery mode. Even after you've done this, as long as the kext signing restriction remains disabled you should take special care when installing kexts.**
 
 ## OS X 11.0 (Big Sur) and higher guide
-1. Go through steps 1-3 of the regular guide below
-2. Run `diskutil list` and note the identifier of your Mac partition
-3. Run `mkdir ~/nonroot`
-4. Run `sudo mount -o nobrowse -t apfs /dev/*IDENTIFIER* ~/nonroot` using the identifier from step 2
-5. Go through steps 5-7 of the regular guide below, replacing `/System/Library/Extensions` with `~/nonroot/System/Library/Extensions` wherever it comes up
-6. Run `sudo bless --folder ~/nonroot/System/Library/CoreServices --bootefi --create-snapshot`
-7. Restart your Mac
+1. Make a copy of `/System/Library/Extensions/IOPlatformPluginFamily.kext` in a safe location, in case anything goes wrong.
+2. Disable System Integrity Protection (SIP) **and** Authenticated Root by running `csrutil disable` and `csrutil authenticated-root` disable from Recovery mode.
+3. Open Terminal and `cd` to the Build folder
+4. Run `diskutil list` and note the identifier of your Mac partition
+5. Run `mkdir ~/nonroot`
+6. Run `sudo mount -o nobrowse -t apfs /dev/*IDENTIFIER* ~/nonroot` using the identifier from step 2
+7. Go through steps 5-7 of the regular guide below, replacing `/System/Library/Extensions` with `~/nonroot/System/Library/Extensions` wherever it comes up
+8. Run `sudo bless --folder ~/nonroot/System/Library/CoreServices --bootefi --create-snapshot`
+9. Restart your Mac
 
 ## Regular guide
 1. Make a copy of `/System/Library/Extensions/IOPlatformPluginFamily.kext` in a safe location, in case anything goes wrong.
-2. *OS X 10.11 (El Capitan) and higher:* Disable System Integrity Protection (SIP)
+2. *OS X 10.11 (El Capitan) and higher:* Disable System Integrity Protection (SIP) by running `csrutil disable` from Recovery mode.
 3. Open Terminal and `cd` to the Build folder
 4. Run `sudo mount -uw /`
 5. Run `sudo rm -rf /System/Library/Extensions/IOPlatformPluginFamily.kext`
