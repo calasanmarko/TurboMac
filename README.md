@@ -23,7 +23,7 @@ We are messing with CPU registers dealing with thermals, so **appropriate care i
 4. Run `diskutil list` and note the identifier of your Mac partition
 5. Run `mkdir ~/nonroot`
 6. Run `sudo mount -o nobrowse -t apfs /dev/*IDENTIFIER* ~/nonroot` using the identifier from step 2
-7. Go through steps 5-7 of the regular guide below, replacing `/System/Library/Extensions` with `~/nonroot/System/Library/Extensions` wherever it comes up
+7. Go through steps 5-8 of the regular guide below, replacing `/System/Library/Extensions` with `~/nonroot/System/Library/Extensions` wherever it comes up
 8. Run `sudo bless --folder ~/nonroot/System/Library/CoreServices --bootefi --create-snapshot`
 9. Restart your Mac
 
@@ -34,8 +34,9 @@ We are messing with CPU registers dealing with thermals, so **appropriate care i
 4. Run `sudo mount -uw /`
 5. Run `sudo rm -rf /System/Library/Extensions/IOPlatformPluginFamily.kext`
 6. Run `sudo cp -rf TurboMac2.kext /System/Library/Extensions/TurboMac2.kext`
-7. Run `sudo kextcache -i /`
-8. Restart your Mac
+7. Run `sudo kextutil /System/Library/Extensions/TurboMac2.kext`
+8. Run `sudo kextcache -i /`
+9. Restart your Mac
 
 You can verify that the extension has loaded correctly by seeing if it shows up when you type `kextstat | grep Turbo` in the Terminal.
 
