@@ -34,7 +34,7 @@ We are messing with CPU registers dealing with thermals, so **appropriate care i
 4. Run `sudo mount -uw /`
 5. Run `sudo rm -rf /System/Library/Extensions/IOPlatformPluginFamily.kext`
 6. Run `sudo cp -rf TurboMac2.kext /System/Library/Extensions/TurboMac2.kext`
-7. Run `sudo kextutil /System/Library/Extensions/TurboMac2.kext`
+7. Run `sudo kextutil /System/Library/Extensions/TurboMac2.kext`, and approve the extension if a prompt shows up.
 8. Run `sudo kextcache -i /`
 9. Restart your Mac
 
