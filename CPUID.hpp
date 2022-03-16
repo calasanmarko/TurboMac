@@ -1,15 +1,10 @@
-//
-//  CPUID.h
-//  TurboMac
-//
-
 #ifndef CPUID_H
 #define CPUID_H
 #endif
 
 #include <stdint.h>
 
-typedef struct {
+class CPUID {
     uint32_t regs[4];
 
 public:
@@ -23,4 +18,4 @@ public:
     const uint32_t &EBX() const {return regs[1];}
     const uint32_t &ECX() const {return regs[2];}
     const uint32_t &EDX() const {return regs[3];}
-} CPUID;
+};
