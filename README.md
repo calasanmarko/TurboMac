@@ -23,28 +23,25 @@ We are messing with CPU registers dealing with thermals, so **appropriate care i
 4. Run `diskutil list` and note the identifier of your Mac partition
 5. Run `mkdir ~/nonroot`
 6. Run `sudo mount -o nobrowse -t apfs /dev/*IDENTIFIER* ~/nonroot` using the identifier from step 2
-7. Go through steps 5-8 of the regular guide below, replacing `/System/Library/Extensions` with `~/nonroot/System/Library/Extensions` wherever it comes up
-8. Run `sudo bless --folder ~/nonroot/System/Library/CoreServices --bootefi --create-snapshot`
-9. Restart your Mac
+7. Go through steps 5-9 of the regular guide below, replacing `/System/Library/Extensions` with `~/nonroot/System/Library/Extensions` wherever it comes up
+8. Run `sudo kmutil install -c -u -v --update-preboot -R nonroot`
+9. Run `sudo bless --folder ~/nonroot/System/Library/CoreServices --bootefi --create-snapshot`
+10. Restart your Mac
 
 ## Regular guide
-1. Make a copy of `/System/Library/Extensions/IOPlatformPluginFamily.kext` in a safe location, in case anything goes wrong.
+1. Make a copy of `/System/Library/Extensions/IOPlatformPluginFamily.kext` and `/System/Library/Extensions/AppleIntelCPUPowerManagement.kext` in a safe location, in case anything goes wrong.
 2. *OS X 10.11 (El Capitan) and higher:* Disable System Integrity Protection (SIP) by running `csrutil disable` from Recovery mode.
 3. Open Terminal and `cd` to the Build folder
 4. Run `sudo mount -uw /`
 5. Run `sudo rm -rf /System/Library/Extensions/IOPlatformPluginFamily.kext/Contents/Plugins/X86PlatformPlugin.kext`
-6. Run `sudo cp -rf TurboMac2.kext /System/Library/Extensions/TurboMac2.kext`
-7. Run `sudo kextutil /System/Library/Extensions/TurboMac2.kext`, and approve the extension if a prompt shows up.
-8. Run `sudo kextcache -i /`
-9. Restart your Mac
+6. Run `sudo rm -rf /System/Library/Extensions/IOPlatformPluginFamily.kext/Contents/Plugins/X86PlatformPluginShim.kext`
+7. Run `sudo rm -rf /System/Library/Extensions/AppleIntelCPUPowerManagement.kext`
+8. Run `sudo cp -rf TurboMac.kext /Library/Extensions/TurboMac.kext`
+9. Run `sudo kextutil /Library/Extensions/TurboMac.kext`, and approve the extension if a prompt shows up.
+10. Run `sudo kextcache -i /`
+11. Restart your Mac
 
-You can verify that the extension has loaded correctly by seeing if it shows up when you type `kextstat | grep Turbo` in the Terminal.
-
-# How it works:
-1. Checks whether your CPU has HWP support
-2. Enables HWP to allow performance profile tweaking by writing 0x1 to MSR register **IA32_HWP_ENABLE (MSR 0x770)**
-3. Queries **IA32_HWP_CAPABILITIES (MSR 0x771)** to get the Maximum_Performance and Guaranteed_Performance values
-4. Sets the minimum performance to Guaranteed_Performance and the maximum performance to Maximum_Performance by writing to **IA32_HWP_REQUEST (MSR 0x774)**
+You can verify that the extension has loaded correctly by seeing if it shows up when you type `kextstat | grep TurboMac` in the Terminal.
 
 # License
 Made by Marko Calasan, 2022.
