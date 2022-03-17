@@ -20,7 +20,7 @@ We are messing with CPU registers dealing with thermals, so **appropriate care i
 2. *OS X 11 (Big Sur) and higher:* Also disable Authenticated Root by running `csrutil authenticated-root disable` from Recovery mode.
 3. Open the Build folder
 4. Grant the installer appropriate for your OS version execution privileges using `chmod +x /path/to/installer` from the Terminal.
-5. Open the appropriate installer and follow further instructions.
+5. Open the appropriate installer and follow further instructions. Make sure you **don't reboot until the installer script is fully complete.**
 
 You can verify that the extension has loaded correctly by seeing if it shows up when you type `kextstat | grep TurboMac` in the Terminal.
 
