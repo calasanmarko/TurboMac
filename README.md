@@ -2,7 +2,7 @@
 *Stops CPU throttling on Intel-based Macs*
 
 # Summary
-A malfunctioning or missing battery and an overzealous thermal controller can cause unnecessary throttling on many Macs, which can be quite hard to get rid of and bring them to a near-unusable state. By setting the appropriate values on the **IA32_HWP_REQUEST (0x774)** MSR, TurboMac keeps your device on a high performance profile.
+A malfunctioning or missing battery and an overzealous thermal controller can cause unnecessary throttling on many Macs, which can be quite hard to get rid of and bring them to a near-unusable state. By setting the appropriate values on the **IA32_HWP_REQUEST (0x774)** or **IA32_PERF_CTL (0x199)** MSR, TurboMac keeps your device on a high performance profile.
 
 # Disclaimer
 **NO WARRANTY! I AM NOT TO BE HELD LIABLE FOR ANY DAMAGES.**
@@ -16,30 +16,11 @@ We are messing with CPU registers dealing with thermals, so **appropriate care i
 # Installation
 **DISCLAIMER: Disabling SIP brings your system to a more vulnerable state. It is recommended that after installation you re-enable SIP (without the kext restriction) by running `csrutil enable --without kext` from Recovery mode. Even after you've done this, as long as the kext signing restriction remains disabled you should take special care when installing kexts.**
 
-## OS X 11.0 (Big Sur) and higher guide
-1. Make a copy of `/System/Library/Extensions/IOPlatformPluginFamily.kext` in a safe location, in case anything goes wrong.
-2. Disable System Integrity Protection (SIP) **and** Authenticated Root by running `csrutil disable` and `csrutil authenticated-root disable` from Recovery mode.
-3. Open Terminal and `cd` to the Build folder
-4. Run `diskutil list` and note the identifier of your Mac partition
-5. Run `mkdir ~/nonroot`
-6. Run `sudo mount -o nobrowse -t apfs /dev/*IDENTIFIER* ~/nonroot` using the identifier from step 2
-7. Go through steps 5-9 of the regular guide below, replacing `/System/Library/Extensions` with `~/nonroot/System/Library/Extensions` wherever it comes up
-8. Run `sudo kmutil install -c -u -v --update-preboot -R nonroot`
-9. Run `sudo bless --folder ~/nonroot/System/Library/CoreServices --bootefi --create-snapshot`
-10. Restart your Mac
-
-## Regular guide
-1. Make a copy of `/System/Library/Extensions/IOPlatformPluginFamily.kext` and `/System/Library/Extensions/AppleIntelCPUPowerManagement.kext` in a safe location, in case anything goes wrong.
-2. *OS X 10.11 (El Capitan) and higher:* Disable System Integrity Protection (SIP) by running `csrutil disable` from Recovery mode.
-3. Open Terminal and `cd` to the Build folder
-4. Run `sudo mount -uw /`
-5. Run `sudo rm -rf /System/Library/Extensions/IOPlatformPluginFamily.kext/Contents/Plugins/X86PlatformPlugin.kext`
-6. Run `sudo rm -rf /System/Library/Extensions/IOPlatformPluginFamily.kext/Contents/Plugins/X86PlatformPluginShim.kext`
-7. Run `sudo rm -rf /System/Library/Extensions/AppleIntelCPUPowerManagement.kext`
-8. Run `sudo cp -rf TurboMac.kext /Library/Extensions/TurboMac.kext`
-9. Run `sudo kextutil /Library/Extensions/TurboMac.kext`, and approve the extension if a prompt shows up.
-10. Run `sudo kextcache -i /`
-11. Restart your Mac
+1. *OS X 10.11 (El Capitan) and higher:* Disable System Integrity Protection (SIP) by running `csrutil disable` from the terminal in Recovery mode.
+2. *OS X 11 (Big Sur) and higher:* Also disable Authenticated Root by running `csrutil authenticated-root disable` from Recovery mode.
+3. Open the Build folder
+4. Grant the installer appropriate for your OS version execution privileges using `chmod +x /path/to/installer` from the Terminal.
+5. Open the appropriate installer and follow further instructions.
 
 You can verify that the extension has loaded correctly by seeing if it shows up when you type `kextstat | grep TurboMac` in the Terminal.
 
