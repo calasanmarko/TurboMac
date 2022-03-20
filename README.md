@@ -22,6 +22,9 @@ We are messing with CPU registers dealing with thermals, so appropriate care is 
 
 You can verify that the extension has loaded correctly by seeing if it shows up when you type `kextstat | grep TurboMac` in the Terminal.
 
+# Uninstallation
+Follow the same steps as in the Installation section, except open the uninstallation script instead of the installation script. You can entirely re-enable SIP and Authenticated Root when done.
+
 # License
 Made by Marko Calasan, 2022.
 
