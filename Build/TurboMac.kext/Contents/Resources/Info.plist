@@ -21,9 +21,9 @@
 	<key>OSBundleLibraries</key>
 	<dict>
 		<key>com.apple.kpi.iokit</key>
-		<string>21.3</string>
+		<string>12.0</string>
 		<key>com.apple.kpi.libkern</key>
-		<string>21.3</string>
+		<string>12.0</string>
 	</dict>
 	<key>OSBundleRequired</key>
 	<string>Root</string>
