@@ -15,6 +15,5 @@ sudo cp -rf $SCRIPT_DIR/TurboMac.kext /Library/Extensions/TurboMac.kext
 
 sudo kextutil /Library/Extensions/TurboMac.kext
 sudo kextcache -i /
-sudo kmutil install -c -u -v --update-preboot
 
 echo "\nInstallation complete. Approve the extension if a prompt appears, and reboot your Mac."

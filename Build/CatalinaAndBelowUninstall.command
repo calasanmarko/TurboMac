@@ -14,6 +14,5 @@ sudo rm -rf /System/Library/Extensions/TurboMac.kext
 sudo rm -rf /System/Library/Extensions/TurboMac2.kext
 
 sudo kextcache -i /
-sudo kmutil install -c -u -v --update-preboot
 
 echo "\nUninstallation complete. Reboot your Mac."
