@@ -17,6 +17,8 @@ const uint32_t HWP_ENABLE_VALUE = 0x1;
 const uint32_t IA32_HWP_CAPABILITIES = 0x771;
 const uint32_t IA32_HWP_REQUEST = 0x774;
 const uint32_t BASE_HWP_VALUE = 0x80000000;
+const uint32_t IA32_MISC_ENABLE = 0x1A0;
+const uint64_t SPEEDSTEP_ENABLE_BIT = 1 << 16;
 
 const uint32_t FIRST_BYTE_MASK = (1 << 8) - 1;
 const uint32_t SECOND_BYTE_MASK = ((1 << 16) - 1) ^ FIRST_BYTE_MASK;
@@ -57,16 +59,9 @@ bool TurboMac::start(IOService *provider)
     else {
         IOLog("CPU does not support SpeedShift.");
         
-        IOLog("Reading from MSR_TURBO_RATIO_LIMIT...");
-        uint64_t maxTurboRatio = rdmsr64(MSR_TURBO_RATIO_LIMIT) % (1 << 8);
-        
-        IOLog("Reading from MSR_PLATFORM_INFO to determine CPU base frequency...");
-        uint64_t baseRatio = (rdmsr64(MSR_PLATFORM_INFO) >> 8) % (1 << 8);
-        
-        IOLog("Writing 3/4 (to prevent overheating) between turbo and base frequencies to IA32_PERF_CTL...");
-        uint64_t desiredRatio = (maxTurboRatio + baseRatio) / 2;
-        desiredRatio = (maxTurboRatio + desiredRatio) / 2;
-        wrmsr64(IA32_PERF_CTL, desiredRatio << 8);
+        IOLog("Writing to IA32_MISC_ENABLE to disable SpeedStep...");
+        uint64_t enabledFeatures = rdmsr64(IA32_MISC_ENABLE);
+        wrmsr64(IA32_MISC_ENABLE, enabledFeatures ^ SPEEDSTEP_ENABLE_BIT);
     }
     
     IOLog("TurboMac fully initialized.");

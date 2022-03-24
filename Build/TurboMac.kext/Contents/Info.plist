@@ -63,7 +63,7 @@
 		<key>com.apple.kpi.libkern</key>
 		<string>12.0</string>
 	</dict>
-	<key>OSBundleRequired</key>
-	<string>Root</string>
+	<key>Nice</key>
+	<integer>20</integer>
 </dict>
 </plist>
