@@ -55,6 +55,8 @@ bool TurboMac::start(IOService *provider)
         
         IOLog("Writing to IA32_HWP_REQUEST to request performance between HighestPerformance and GuaranteedPerformance...");
         wrmsr64(IA32_HWP_REQUEST, BASE_HWP_VALUE | (highestPerformance << 8) | guaranteedPerformance);
+        
+        wrmsr64(0x1FC, rdmsr64(0x1FC) ^ 1);
     }
     else {
         IOLog("CPU does not support SpeedShift.");
