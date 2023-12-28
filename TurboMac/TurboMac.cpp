@@ -18,6 +18,7 @@ const uint32_t IA32_HWP_CAPABILITIES = 0x771;
 const uint32_t IA32_HWP_REQUEST = 0x774;
 const uint32_t BASE_HWP_VALUE = 0x80000000;
 const uint32_t IA32_MISC_ENABLE = 0x1A0;
+const uint32_t BD_PROCHOT_REGISTER = 0x1FC;
 const uint64_t SPEEDSTEP_ENABLE_BIT = 1 << 16;
 
 const uint32_t FIRST_BYTE_MASK = (1 << 8) - 1;
@@ -55,8 +56,6 @@ bool TurboMac::start(IOService *provider)
         
         IOLog("Writing to IA32_HWP_REQUEST to request performance between HighestPerformance and GuaranteedPerformance...");
         wrmsr64(IA32_HWP_REQUEST, BASE_HWP_VALUE | (highestPerformance << 8) | guaranteedPerformance);
-        
-        wrmsr64(0x1FC, rdmsr64(0x1FC) ^ 1);
     }
     else {
         IOLog("CPU does not support SpeedShift.");
@@ -65,6 +64,9 @@ bool TurboMac::start(IOService *provider)
         uint64_t enabledFeatures = rdmsr64(IA32_MISC_ENABLE);
         wrmsr64(IA32_MISC_ENABLE, enabledFeatures ^ SPEEDSTEP_ENABLE_BIT);
     }
+
+    IOLog("Disabling BD_PROCHOT...");
+    wrmsr64(BD_PROCHOT_REGISTER, rdmsr64(BD_PROCHOT_REGISTER) ^ 1);
     
     IOLog("TurboMac fully initialized.");
     return res;
